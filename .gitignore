@@ -1,0 +1,11 @@
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+.env
+# Carpetas de compilación (Basura técnica)
+bin/
+obj/
+.vs/
+.vscode/
+# Herramientas de base de datos
+*.db
