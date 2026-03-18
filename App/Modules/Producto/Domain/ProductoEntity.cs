@@ -41,6 +41,16 @@ namespace Backend.App.Modules.Producto.Domain
                 throw new ArgumentException("El nombre no puede estar vacío.");
             }
         }
+
+        public void ActualizarProducto(string nombre, int stock, decimal precio)
+        {
+            validarNombre(nombre);
+            validarStock(stock);
+            validarPrecio(precio);
+            Nombre = nombre;
+            Stock = stock;
+            Precio = precio;
+        }
 }
 }
 

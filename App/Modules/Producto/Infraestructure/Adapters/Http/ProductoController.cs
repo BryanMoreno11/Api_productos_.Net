@@ -8,19 +8,37 @@ namespace Backend.App.Modules.Producto.Infrastructure.Adapters.Http
     [Route("api/[controller]")]
     public class ProductoController : ControllerBase
     {
-        private readonly ObtenerProductos _obtenerUseCase;
+        private readonly ObtenerProductos _obtenerTodosUseCase;
+        private readonly ObtenerProducto _obtenerUnoUseCase;
         private readonly AgregarProducto _agregarUseCase;
+        private readonly ModificarProducto _modificarUseCase;
+        private readonly EliminarProducto _eliminarUseCase;
 
-        public ProductoController(ObtenerProductos useCase, AgregarProducto agregarUseCase)
+        public ProductoController(
+            ObtenerProductos obtenerTodosUseCase,
+            ObtenerProducto obtenerUnoUseCase,
+            AgregarProducto agregarUseCase,
+            ModificarProducto modificarUseCase,
+            EliminarProducto eliminarUseCase)
         {
-            _obtenerUseCase = useCase;
+            _obtenerTodosUseCase = obtenerTodosUseCase;
+            _obtenerUnoUseCase = obtenerUnoUseCase;
             _agregarUseCase = agregarUseCase;
+            _modificarUseCase = modificarUseCase;
+            _eliminarUseCase = eliminarUseCase;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _obtenerUseCase.ExecuteAsync();
+            var result = await _obtenerTodosUseCase.ExecuteAsync();
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            var result = await _obtenerUnoUseCase.ExecuteAsync(id);
             return Ok(result);
         }
 
@@ -29,6 +47,20 @@ namespace Backend.App.Modules.Producto.Infrastructure.Adapters.Http
         {
             await _agregarUseCase.ExecuteAsync(dto);
             return Ok(new { mensaje = "Producto insertado con éxito" });
+        }
+
+        [HttpPut("modificar-producto/{id}")]
+        public async Task<IActionResult> Modificar(Guid id, [FromBody] ProductoDto dto)
+        {
+            await _modificarUseCase.ExecuteAsync(id, dto.Nombre, dto.Stock, dto.Precio);
+            return Ok(new { mensaje = "Producto modificado con éxito" });
+        }
+
+        [HttpDelete("eliminar-producto/{id}")]
+        public async Task<IActionResult> Eliminar(Guid id)
+        {
+            await _eliminarUseCase.ExecuteAsync(id);
+            return Ok(new { mensaje = "Producto eliminado con éxito" });
         }
     }
 }
