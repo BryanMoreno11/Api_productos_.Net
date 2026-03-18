@@ -1,6 +1,6 @@
 namespace Backend.App.Modules.Producto.Domain
 {
-    public class ProductoDTO
+    public class ProductoDto
     {
         public Guid Id { get; set; }
         public string Nombre { get; set; } = string.Empty;
@@ -15,9 +15,9 @@ namespace Backend.App.Modules.Producto.Domain
                 this.Precio
             );
         }
-        public ProductoDTO FromEntity(ProductoEntity entity)
+        public ProductoDto FromEntity(ProductoEntity entity)
         {
-            return new ProductoDTO
+            return new ProductoDto
             {
                 Id = entity.Id,
                 Nombre = entity.Nombre,

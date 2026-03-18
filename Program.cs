@@ -1,5 +1,11 @@
 using Backend.App.Modules.Producto.Infrastructure;
+using Backend.App.Shared;
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
+//Base de Datos
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(connectionString));
 //Cors
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAngular", policy => {
@@ -15,7 +21,9 @@ builder.Services.AddSwaggerGen();
 // Servicios del módulo Producto
 ProductoUseCaseRegister.Register(builder.Services, builder.Configuration);
 var app = builder.Build();
-// --- 4. PIPELINE DE EJECUCIÓN ---
+//Middleware global para manejo de excepciones
+app.UseMiddleware<ExceptionMiddleware>();
+//PIPELINE DE EJECUCIÓN ---
 if (app.Environment.IsDevelopment()) {
     app.UseSwagger();
     app.UseSwaggerUI();

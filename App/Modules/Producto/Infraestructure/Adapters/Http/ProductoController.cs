@@ -1,4 +1,5 @@
 using Backend.App.Modules.Producto.Application.UseCase;
+using Backend.App.Modules.Producto.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.App.Modules.Producto.Infrastructure.Adapters.Http
@@ -7,18 +8,27 @@ namespace Backend.App.Modules.Producto.Infrastructure.Adapters.Http
     [Route("api/[controller]")]
     public class ProductoController : ControllerBase
     {
-        private readonly ProductoGetAll _useCase;
+        private readonly ObtenerProductos _obtenerUseCase;
+        private readonly AgregarProducto _agregarUseCase;
 
-        public ProductoController(ProductoGetAll useCase)
+        public ProductoController(ObtenerProductos useCase, AgregarProducto agregarUseCase)
         {
-            _useCase = useCase;
+            _obtenerUseCase = useCase;
+            _agregarUseCase = agregarUseCase;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _useCase.ExecuteAsync();
+            var result = await _obtenerUseCase.ExecuteAsync();
             return Ok(result);
+        }
+
+        [HttpPost("crear-producto")]
+        public async Task<IActionResult> Crear([FromBody] ProductoDto dto)
+        {
+            await _agregarUseCase.ExecuteAsync(dto);
+            return Ok(new { mensaje = "Producto insertado con éxito" });
         }
     }
 }

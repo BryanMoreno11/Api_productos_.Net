@@ -22,7 +22,7 @@ namespace Backend.App.Modules.Producto.Domain
         {
             if (stock < 0)
             {
-                throw new Exception("El stock no puede ser negativo.");
+                throw new ArgumentException("El stock no puede ser negativo.");
             }
         }
 
@@ -30,7 +30,7 @@ namespace Backend.App.Modules.Producto.Domain
         {
             if (precio < 0)
             {
-                throw new Exception("El precio no puede ser negativo.");
+                throw new ArgumentException("El precio no puede ser negativo.");
             }
         }
 
@@ -38,7 +38,7 @@ namespace Backend.App.Modules.Producto.Domain
         {
             if (string.IsNullOrWhiteSpace(nombre))
             {
-                throw new Exception("El nombre no puede estar vacío.");
+                throw new ArgumentException("El nombre no puede estar vacío.");
             }
         }
 }
