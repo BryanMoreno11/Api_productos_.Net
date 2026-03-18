@@ -10,11 +10,9 @@ namespace Backend.App.Modules.Producto.Infrastructure
         {
             //Inyección de Dependencias
             services.AddScoped<IProductoRepository, ProductoRepository>();
-            services.AddScoped<ObtenerProductos>();
             services.AddScoped<AgregarProducto>(); 
             services.AddScoped<ObtenerProductos>();
             services.AddScoped<ObtenerProducto>();
-            services.AddScoped<AgregarProducto>();
             services.AddScoped<ModificarProducto>();
             services.AddScoped<EliminarProducto>();
         }
