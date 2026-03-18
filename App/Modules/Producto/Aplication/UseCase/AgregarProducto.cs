@@ -13,7 +13,7 @@ namespace Backend.App.Modules.Producto.Application.UseCase
 
         public async Task ExecuteAsync(ProductoDto productoDto)
         {
-            ProductoEntity producto= new ProductoEntity(productoDto.Id, productoDto.Nombre, productoDto.Stock,  productoDto.Precio);
+            ProductoEntity producto= new ProductoEntity( productoDto.Nombre, productoDto.Stock,  productoDto.Precio);
             await _repository.AddAsync(producto);
             await _repository.SaveChangesAsync();
         }

@@ -9,7 +9,6 @@ namespace Backend.App.Modules.Producto.Domain
         public ProductoEntity GetEntity()
         {
             return new ProductoEntity(
-                this.Id,
                 this.Nombre,
                 this.Stock,
                 this.Precio

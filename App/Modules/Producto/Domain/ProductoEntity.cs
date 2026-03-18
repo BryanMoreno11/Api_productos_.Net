@@ -7,12 +7,12 @@ namespace Backend.App.Modules.Producto.Domain
     public int Stock {get;  private set; }
     public decimal Precio { get; private set; }
     private ProductoEntity() { }
-    public ProductoEntity(Guid id, string nombre, int stock, decimal precio)
+    public ProductoEntity( string nombre, int stock, decimal precio)
     {
         validarNombre(nombre);
         validarStock(stock);
         validarPrecio(precio);
-        Id = id;
+        Id = Guid.NewGuid();
         Nombre = nombre;
         Stock = stock;
         Precio = precio;
