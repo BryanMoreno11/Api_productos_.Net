@@ -2,7 +2,7 @@ namespace Backend.App.Modules.Producto.Domain
 {
     public class ProductoDto
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public string Nombre { get; set; } = string.Empty;
         public int Stock { get; set; }
         public decimal Precio { get; set; }
