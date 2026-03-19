@@ -11,7 +11,7 @@ namespace Backend.App.Modules.Producto.Application.UseCase
             _repository = repository;
         }
 
-        public async Task ExecuteAsync(Guid id)
+        public async Task ExecuteAsync(int id)
         {
             var producto = await _repository.GetByIdAsync(id);
             if (producto == null)

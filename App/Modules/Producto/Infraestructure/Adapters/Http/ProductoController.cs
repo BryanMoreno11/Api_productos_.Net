@@ -40,7 +40,7 @@ namespace Backend.App.Modules.Producto.Infrastructure.Adapters.Http
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> GetById(int id)
         {
             var result = await _obtenerUnoUseCase.ExecuteAsync(id);
             return Ok(result);
@@ -61,14 +61,14 @@ namespace Backend.App.Modules.Producto.Infrastructure.Adapters.Http
         }
 
         [HttpPut("modificar-producto/{id}")]
-        public async Task<IActionResult> Modificar(Guid id, [FromBody] ProductoDto dto)
+        public async Task<IActionResult> Modificar(int id, [FromBody] ProductoDto dto)
         {
             await _modificarUseCase.ExecuteAsync(id, dto.Nombre, dto.Stock, dto.Precio);
             return Ok(new { mensaje = "Producto modificado con éxito" });
         }
 
         [HttpDelete("eliminar-producto/{id}")]
-        public async Task<IActionResult> Eliminar(Guid id)
+        public async Task<IActionResult> Eliminar(int id)
         {
             await _eliminarUseCase.ExecuteAsync(id);
             return Ok(new { mensaje = "Producto eliminado con éxito" });

@@ -17,10 +17,10 @@ namespace Backend.App.Modules.Producto.Infrastructure.Adapters.Persistence
 
         public async Task<List<ProductoEntity>> GetAllAsync()
         {
-            return await _context.Productos.AsNoTracking().ToListAsync();
+            return await _context.Productos.AsNoTracking().OrderBy(p => p.Id).ToListAsync();
         }
 
-        public async Task<ProductoEntity?> GetByIdAsync(Guid id)
+        public async Task<ProductoEntity?> GetByIdAsync(int id)
         {
             return await _context.Productos.FindAsync(id);
         }

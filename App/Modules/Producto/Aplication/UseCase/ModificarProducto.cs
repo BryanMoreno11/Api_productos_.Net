@@ -9,7 +9,7 @@ namespace Backend.App.Modules.Producto.Application.UseCase
         _repository = repository;
     }
 
-    public async Task ExecuteAsync(Guid id, string nombre, int stock, decimal precio)
+    public async Task ExecuteAsync(int id, string nombre, int stock, decimal precio)
     {
         var producto = await _repository.GetByIdAsync(id);
         if (producto == null)

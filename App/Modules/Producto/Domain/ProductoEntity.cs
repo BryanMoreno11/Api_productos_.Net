@@ -2,7 +2,7 @@ namespace Backend.App.Modules.Producto.Domain
 {
     public class ProductoEntity
 {
-    public Guid Id { get; private set; }
+    public int Id { get; private set; }
     public string Nombre { get;  private set; }= string.Empty;
     public int Stock {get;  private set; }
     public decimal Precio { get; private set; }
@@ -12,7 +12,6 @@ namespace Backend.App.Modules.Producto.Domain
         validarNombre(nombre);
         validarStock(stock);
         validarPrecio(precio);
-        Id = Guid.NewGuid();
         Nombre = nombre;
         Stock = stock;
         Precio = precio;
