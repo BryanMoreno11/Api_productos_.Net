@@ -1,5 +1,6 @@
 using Backend.App.Modules.Producto.Application.UseCase;
 using Backend.App.Modules.Producto.Domain;
+using Backend.App.Modules.Producto.Domain.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.App.Modules.Producto.Infrastructure.Adapters.Http
@@ -13,19 +14,22 @@ namespace Backend.App.Modules.Producto.Infrastructure.Adapters.Http
         private readonly AgregarProducto _agregarUseCase;
         private readonly ModificarProducto _modificarUseCase;
         private readonly EliminarProducto _eliminarUseCase;
+        private readonly ObtenerProductosPaginados _obtenerPaginadoUseCase;
 
         public ProductoController(
             ObtenerProductos obtenerTodosUseCase,
             ObtenerProducto obtenerUnoUseCase,
             AgregarProducto agregarUseCase,
             ModificarProducto modificarUseCase,
-            EliminarProducto eliminarUseCase)
+            EliminarProducto eliminarUseCase,
+            ObtenerProductosPaginados obtenerPaginadoUseCase)
         {
             _obtenerTodosUseCase = obtenerTodosUseCase;
             _obtenerUnoUseCase = obtenerUnoUseCase;
             _agregarUseCase = agregarUseCase;
             _modificarUseCase = modificarUseCase;
             _eliminarUseCase = eliminarUseCase;
+            _obtenerPaginadoUseCase= obtenerPaginadoUseCase;
         }
 
         [HttpGet]
@@ -39,6 +43,13 @@ namespace Backend.App.Modules.Producto.Infrastructure.Adapters.Http
         public async Task<IActionResult> GetById(Guid id)
         {
             var result = await _obtenerUnoUseCase.ExecuteAsync(id);
+            return Ok(result);
+        }
+
+        [HttpGet("listar-paginado")]
+        public async Task<IActionResult> GetPaginado([FromQuery] ProductoCriteriaDto criteria)
+        {
+            var result = await _obtenerPaginadoUseCase.ExecuteAsync(criteria);
             return Ok(result);
         }
 

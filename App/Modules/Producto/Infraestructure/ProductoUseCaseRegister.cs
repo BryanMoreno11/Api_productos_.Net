@@ -15,6 +15,7 @@ namespace Backend.App.Modules.Producto.Infrastructure
             services.AddScoped<ObtenerProducto>();
             services.AddScoped<ModificarProducto>();
             services.AddScoped<EliminarProducto>();
+            services.AddScoped<ObtenerProductosPaginados>();
         }
     }
 }

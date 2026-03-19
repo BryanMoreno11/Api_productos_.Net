@@ -1,5 +1,7 @@
 using Backend.App.Modules.Producto.Domain;
 using Backend.App.Shared;
+using Backend.App.Shared.Domain.Specifications;
+using Backend.App.Shared.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.App.Modules.Producto.Infrastructure.Adapters.Persistence
@@ -38,6 +40,18 @@ namespace Backend.App.Modules.Producto.Infrastructure.Adapters.Persistence
         {
             _context.Productos.Remove(producto);
             return Task.CompletedTask;
+        }
+
+        public async Task<List<ProductoEntity>> GetWithSpecAsync(ISpecification<ProductoEntity> spec)
+        {   
+            return await SpecificationEvaluator<ProductoEntity>
+                .GetQuery(_context.Productos.AsQueryable(), spec)
+                .ToListAsync();
+        }
+
+        public async Task<int> CountAsync(ISpecification<ProductoEntity> spec)
+        {
+            return await _context.Productos.Where(spec.Criteria).CountAsync();    
         }
 
         public async Task SaveChangesAsync()

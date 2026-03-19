@@ -1,3 +1,5 @@
+using Backend.App.Shared.Domain.Specifications;
+
 namespace Backend.App.Modules.Producto.Domain
 {
     public interface IProductoRepository
@@ -8,5 +10,7 @@ namespace Backend.App.Modules.Producto.Domain
          Task UpdateAsync(ProductoEntity producto);
         Task DeleteAsync(ProductoEntity producto);
         Task  SaveChangesAsync();
+        Task<List<ProductoEntity>> GetWithSpecAsync(ISpecification<ProductoEntity> spec);
+        Task<int> CountAsync(ISpecification<ProductoEntity> spec);
     }
 }
