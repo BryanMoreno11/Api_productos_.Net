@@ -20,6 +20,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // Servicios del módulo Producto
 ProductoUseCaseRegister.Register(builder.Services, builder.Configuration);
+// Servicios del módulo Bodega
+Backend.App.Modules.Bodega.Infrastructure.BodegaUseCaseRegister.Register(builder.Services, builder.Configuration);
 var app = builder.Build();
 //Middleware global para manejo de excepciones
 app.UseMiddleware<ExceptionMiddleware>();
