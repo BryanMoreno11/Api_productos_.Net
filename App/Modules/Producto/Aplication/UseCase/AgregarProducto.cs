@@ -1,5 +1,5 @@
-
 using Backend.App.Modules.Producto.Domain;
+using Backend.App.Modules.Producto.Domain.DTO;
 
 namespace Backend.App.Modules.Producto.Application.UseCase
 {
@@ -11,7 +11,7 @@ namespace Backend.App.Modules.Producto.Application.UseCase
             _repository = repository;
         }
 
-        public async Task ExecuteAsync(ProductoDto productoDto)
+        public async Task ExecuteAsync(CrearProductoDto productoDto)
         {
             ProductoEntity producto= new ProductoEntity( productoDto.Nombre, productoDto.Stock,  productoDto.Precio);
             await _repository.AddAsync(producto);

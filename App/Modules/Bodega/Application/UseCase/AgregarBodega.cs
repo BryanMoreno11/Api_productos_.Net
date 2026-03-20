@@ -11,7 +11,7 @@ namespace Backend.App.Modules.Bodega.Application.UseCase
             _repository = repository;
         }
 
-        public async Task ExecuteAsync(BodegaDto bodegaDto)
+        public async Task ExecuteAsync(CrearBodegaDto bodegaDto)
         {
             BodegaEntity bodega = new BodegaEntity(bodegaDto.Nombre, bodegaDto.Descripcion);
             await _repository.AddAsync(bodega);

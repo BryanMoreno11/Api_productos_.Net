@@ -54,14 +54,14 @@ namespace Backend.App.Modules.Producto.Infrastructure.Adapters.Http
         }
 
         [HttpPost("crear-producto")]
-        public async Task<IActionResult> Crear([FromBody] ProductoDto dto)
+        public async Task<IActionResult> Crear([FromBody] CrearProductoDto dto)
         {
             await _agregarUseCase.ExecuteAsync(dto);
             return Ok(new { mensaje = "Producto insertado con éxito" });
         }
 
         [HttpPut("modificar-producto/{id}")]
-        public async Task<IActionResult> Modificar(int id, [FromBody] ProductoDto dto)
+        public async Task<IActionResult> Modificar(int id, [FromBody] ModificarProductoDto dto)
         {
             await _modificarUseCase.ExecuteAsync(id, dto.Nombre, dto.Stock, dto.Precio);
             return Ok(new { mensaje = "Producto modificado con éxito" });

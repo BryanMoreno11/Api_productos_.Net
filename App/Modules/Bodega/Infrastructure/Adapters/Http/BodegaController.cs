@@ -54,14 +54,14 @@ namespace Backend.App.Modules.Bodega.Infrastructure.Adapters.Http
         }
 
         [HttpPost("crear-bodega")]
-        public async Task<IActionResult> Crear([FromBody] BodegaDto dto)
+        public async Task<IActionResult> Crear([FromBody] CrearBodegaDto dto)
         {
             await _agregarUseCase.ExecuteAsync(dto);
             return Ok(new { mensaje = "Bodega insertada con éxito" });
         }
 
         [HttpPut("modificar-bodega/{id}")]
-        public async Task<IActionResult> Modificar(int id, [FromBody] BodegaDto dto)
+        public async Task<IActionResult> Modificar(int id, [FromBody] ModificarBodegaDto dto)
         {
             await _modificarUseCase.ExecuteAsync(id, dto.Nombre, dto.Descripcion);
             return Ok(new { mensaje = "Bodega modificada con éxito" });
