@@ -11,7 +11,7 @@ namespace Backend.App.Modules.Producto.Application.UseCase
             _repository = repository;
         }
         public async Task<object> ExecuteAsync(ProductoCriteriaDto criteria) {
-            var spec = new ProductoFilterSpec(criteria.Nombre, criteria.StockMinimo, criteria.Page, criteria.PageSize);
+            var spec = new ProductoFilterSpec(criteria.Nombre, criteria.StockMinimo, criteria.FechaIngresoHasta, criteria.BodegaId, criteria.Page, criteria.PageSize);
             var productos = await _repository.GetWithSpecAsync(spec);
             var total = await _repository.CountAsync(spec);
             return new {

@@ -19,6 +19,8 @@ namespace Backend.App.Shared
                 entity.Property(e => e.Nombre).IsRequired().HasMaxLength(150);
                 entity.Property(e => e.Precio).HasColumnType("decimal(18,2)");
                 entity.Property(e => e.Stock).IsRequired();
+                entity.Property(e => e.FechaIngreso).IsRequired();
+                entity.HasOne(p => p.Bodega).WithMany().HasForeignKey(p => p.BodegaId);
             });
 
             modelBuilder.Entity<BodegaEntity>(entity => {

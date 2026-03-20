@@ -63,7 +63,7 @@ namespace Backend.App.Modules.Producto.Infrastructure.Adapters.Http
         [HttpPut("modificar-producto/{id}")]
         public async Task<IActionResult> Modificar(int id, [FromBody] ModificarProductoDto dto)
         {
-            await _modificarUseCase.ExecuteAsync(id, dto.Nombre, dto.Stock, dto.Precio);
+            await _modificarUseCase.ExecuteAsync(id, dto.Nombre, dto.Stock, dto.Precio, dto.FechaIngreso, dto.BodegaId);
             return Ok(new { mensaje = "Producto modificado con éxito" });
         }
 
