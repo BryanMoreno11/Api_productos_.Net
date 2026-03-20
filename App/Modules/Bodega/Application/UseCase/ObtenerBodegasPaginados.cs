@@ -22,11 +22,10 @@ namespace Backend.App.Modules.Bodega.Application.UseCase
             
             return new
             {
-                Data = bodegas.Select(b => BodegaDto.FromEntity(b)).ToList(),
-                TotalItems = totalItems,
-                Page = criteria.Page,
-                PageSize = criteria.PageSize,
-                TotalPages = (int)Math.Ceiling(totalItems / (double)criteria.PageSize)
+                items = bodegas.Select(b => BodegaDto.FromEntity(b)).ToList(),
+                totalItems = totalItems,
+                page = criteria.Page,
+                pageSize = criteria.PageSize
             };
         }
     }
